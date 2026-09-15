@@ -166,7 +166,7 @@ export interface TrustedBrandItem {
   isBadge?: boolean;
   isTpLink?: boolean;
 }
-
+const API_URL = import.meta.env.VITE_API_URL;
 const fallbackData: SiteContentResponse = {
   settings: {
     phone1: '9360484136',
@@ -196,7 +196,7 @@ const fallbackData: SiteContentResponse = {
 
 export async function fetchSiteContent(): Promise<SiteContentResponse> {
   try {
-    const response = await fetch('http://localhost:8000/api/site/', {
+    const response = await fetch(`${API_URL}/api/site/`, {
       headers: {
         Accept: 'application/json',
       },
@@ -223,7 +223,7 @@ export async function fetchSiteContent(): Promise<SiteContentResponse> {
 }
 
 export async function submitContactMessage(message: ContactMessageInput): Promise<void> {
-  const response = await fetch('http://localhost:8000/api/contact/', {
+  const response = await fetch(`${API_URL}/api/contact/`, {
     method: 'POST',
     headers: {
       Accept: 'application/json',
