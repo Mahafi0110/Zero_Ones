@@ -108,9 +108,6 @@ export const Footer: React.FC<FooterProps> = ({ settings, section, products = []
       {/* Bottom Copyright Bar */}
       <div className="max-w-7xl mx-auto px-6 lg:px-8 pt-6 flex flex-col sm:flex-row items-center justify-between text-gray-500 text-[11px]">
         <p>© {new Date().getFullYear()} Zero Ones Security System. All Rights Reserved.</p>
-        <p className="mt-2 sm:mt-0">
-          Managed via <a href="http://localhost:8000/admin/" target="_blank" rel="noreferrer" className="text-blue-400 underline">Django Admin Panel</a>
-        </p>
       </div>
     </footer>
   );
