@@ -12,6 +12,7 @@ export const Contact: React.FC<ContactProps> = ({ settings, section }) => {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
   const supportItems = (section?.support_items || 'CCTV Installation\nCCTV Setup & Configuration\nCCTV Repair & Maintenance\nBiometric Attendance\nGPS Vehicle Tracking\nCash Counting Machines\nOther Relevant Technology Requirements')
     .split('\n')
     .map(item => item.trim())
@@ -23,7 +24,8 @@ export const Contact: React.FC<ContactProps> = ({ settings, section }) => {
     setError('');
 
     try {
-      await submitContactMessage(formData);
+      const result = await submitContactMessage(formData);
+      setStatusMessage(result.detail);
       setSubmitted(true);
       setFormData({ name: '', phone: '', email: '', message: '' });
     } catch (submissionError) {
@@ -113,10 +115,17 @@ export const Contact: React.FC<ContactProps> = ({ settings, section }) => {
             {submitted ? (
               <div className="py-12 text-center flex flex-col items-center justify-center">
                 <div className="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-4 text-xl font-bold">✓</div>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">Message Sent!</h3>
-                <p className="text-xs text-gray-500 mb-6">Thank you for reaching out. We will get back to you shortly.</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">
+                  {statusMessage.includes('saved') ? 'Message Received' : 'Message Sent!'}
+                </h3>
+                <p className="text-xs text-gray-500 mb-6">
+                  {statusMessage || 'Thank you for reaching out. We will get back to you shortly.'}
+                </p>
                 <button 
-                  onClick={() => setSubmitted(false)}
+                  onClick={() => {
+                    setSubmitted(false);
+                    setStatusMessage('');
+                  }}
                   className="bg-blue-600 text-white px-6 py-2.5 rounded-xl text-xs font-semibold hover:bg-blue-700 transition"
                 >
                   Send Another Message

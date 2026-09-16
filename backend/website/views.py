@@ -71,8 +71,11 @@ class ContactMessageView(APIView):
 			)
 		except Exception:
 			return Response(
-				{'detail': 'Your message was saved, but email delivery is not configured yet.'},
-				status=503,
+				{
+					'detail': 'Your message was saved, but email delivery is not configured yet.',
+					'warning': True,
+				},
+				status=202,
 			)
 
 		return Response({'detail': 'Message sent successfully.'}, status=201)

@@ -1,0 +1,110 @@
+{% extends 'admin/base.html' %}
+
+{% block title %}{{ title }} | Zero Ones Admin{% endblock %}
+
+{% block extrastyle %}
+{{ block.super }}
+<style>
+  :root {
+    --zo-bg: #f4f7fb;
+    --zo-panel: #ffffff;
+    --zo-sidebar: #0b1f3a;
+    --zo-accent: #0f766e;
+    --zo-accent-2: #f59e0b;
+    --zo-text: #1f2937;
+    --zo-muted: #6b7280;
+    --zo-border: #e5e7eb;
+  }
+
+  body {
+    background: linear-gradient(180deg, #eef6ff 0%, var(--zo-bg) 100%);
+    color: var(--zo-text);
+  }
+
+  #header {
+    background: linear-gradient(135deg, var(--zo-sidebar) 0%, #12335c 100%);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  #branding h1, #branding a {
+    color: #ffffff !important;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
+  .module caption, .module h2, .module h3, .module a {
+    color: var(--zo-text);
+  }
+
+  div.breadcrumbs {
+    background: rgba(15, 118, 110, 0.08);
+    color: var(--zo-text);
+    border-bottom: 1px solid var(--zo-border);
+  }
+
+  .button, input[type="submit"], input[type="button"], .submit-row input {
+    background: var(--zo-accent);
+    border: none;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+  }
+
+  .button.default, .submit-row input.default {
+    background: linear-gradient(135deg, var(--zo-accent) 0%, #0d9488 100%);
+  }
+
+  .module {
+    background: var(--zo-panel);
+    border: 1px solid var(--zo-border);
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+  }
+
+  .app-list .module {
+    padding: 12px 14px;
+  }
+
+  #content {
+    padding: 24px 18px 40px;
+  }
+
+  .dashboard-card {
+    background: var(--zo-panel);
+    border: 1px solid var(--zo-border);
+    border-radius: 12px;
+    box-shadow: 0 8px 18px rgba(15, 23, 42, 0.04);
+    padding: 18px;
+    margin-bottom: 18px;
+  }
+
+  .dashboard-card h2 {
+    margin-top: 0;
+    color: var(--zo-sidebar);
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+  }
+
+  .stat-box {
+    background: linear-gradient(135deg, #ecfeff 0%, #f0fdf4 100%);
+    border: 1px solid rgba(15, 118, 110, 0.18);
+    border-radius: 12px;
+    padding: 18px;
+  }
+
+  .stat-box strong {
+    display: block;
+    font-size: 1.8rem;
+    color: var(--zo-accent);
+    margin-top: 8px;
+  }
+</style>
+{% endblock %}
+
+{% block branding %}
+<h1 id="site-name">Zero Ones Admin</h1>
+{% endblock %}

@@ -2,12 +2,12 @@
 URL configuration for config project.
 """
 
-from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
 from django.http import JsonResponse
 from django.urls import path
 
+from website.admin import admin_site
 from website.views import ContactMessageView, SiteContentView
 
 
@@ -20,7 +20,7 @@ def home(request):
 
 urlpatterns = [
     path('', home, name='home'),
-    path('admin/', admin.site.urls),
+    path('admin/', admin_site.urls),
     path('api/site/', SiteContentView.as_view(), name='site-content'),
     path('api/contact/', ContactMessageView.as_view(), name='contact-message'),
 ]

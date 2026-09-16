@@ -222,7 +222,12 @@ export async function fetchSiteContent(): Promise<SiteContentResponse> {
   }
 }
 
-export async function submitContactMessage(message: ContactMessageInput): Promise<void> {
+export interface ContactSubmissionResult {
+  detail: string;
+  warning: boolean;
+}
+
+export async function submitContactMessage(message: ContactMessageInput): Promise<ContactSubmissionResult> {
   const response = await fetch(`${API_URL}/api/contact/`, {
     method: 'POST',
     headers: {
@@ -232,8 +237,15 @@ export async function submitContactMessage(message: ContactMessageInput): Promis
     body: JSON.stringify(message),
   });
 
+  const data = (await response.json().catch(() => null)) as { detail?: string; warning?: boolean } | null;
+
   if (!response.ok) {
-    const data = (await response.json().catch(() => null)) as { detail?: string } | null;
-    throw new Error(data?.detail || 'Unable to send your message.');
+    const detail = data?.detail || 'Unable to send your message.';
+    throw new Error(detail);
   }
+
+  return {
+    detail: data?.detail || 'Message sent successfully.',
+    warning: Boolean(data?.warning),
+  };
 }

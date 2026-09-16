@@ -1,0 +1,25 @@
+{% extends 'admin/index.html' %}
+
+{% block content %}
+<div id="content-main">
+  <div class="dashboard-card">
+    <h2>Quick overview</h2>
+    <div class="card-grid">
+      <div class="stat-box">
+        <span>Website sections</span>
+        <strong>{{ app_list|length }}</strong>
+      </div>
+      <div class="stat-box">
+        <span>Messages</span>
+        <strong>{{ app_list.1.models.0|default:'0' }}</strong>
+      </div>
+      <div class="stat-box">
+        <span>Published content</span>
+        <strong>Live</strong>
+      </div>
+    </div>
+  </div>
+
+  {{ block.super }}
+</div>
+{% endblock %}
